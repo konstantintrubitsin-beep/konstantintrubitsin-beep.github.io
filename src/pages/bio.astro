@@ -1,0 +1,45 @@
+---
+import Base from '../layouts/Base.astro';
+
+const navigation = [
+  ['photographs', 'Photographs'],
+  ['objects', 'Objects'],
+  ['books', 'Books'],
+  ['installation', 'Installation'],
+  ['video', 'Videos'],
+  ['observations', 'Observations'],
+  ['lectures', 'Lectures'],
+  ['music', 'Music'],
+  ['bio', 'Bio'],
+];
+---
+
+<Base title="Noah Dillon">
+  <nav class="site-nav" aria-label="Primary navigation">
+    {navigation.map(([path, label]) => <a class:list={{ active: path === 'bio' }} href={`/${path}`}>{label}</a>)}
+  </nav>
+
+  <div class="text-page">
+    <div class="text-page-content bio-content">
+      <div>Noah Dillon</div>
+      <br /><br />
+      <div>Born in Durango, Colorado.<br />Lives and works in Los Angeles.</div>
+      <br />
+      <div>Artist. Photographer. Director. Musician.</div>
+      <br />
+      <div>Founder of the band "The Hellp."</div>
+      <br />
+      <div>Yale Poynter Fellow</div>
+      <br /><br />
+      <div>Selected clients</div>
+      <br />
+      <div>
+        Gucci<br />Nike<br />Louis Vuitton<br />Maison Martin Margiela<br />Versace<br />The Weeknd<br />Dion Lee<br />SSENSE<br />Shayne Oliver<br />Off White<br />The North Face<br />Rosalía<br />Bianca Censori
+        <br /><br />
+        <a href="mailto:noahpdillon@gmail.com">noahpdillon@gmail.com</a>
+        <br /><br />
+        <a href="https://interno9.ch" target="_blank" rel="noreferrer">Developed by interno9.ch</a>
+      </div>
+    </div>
+  </div>
+</Base>

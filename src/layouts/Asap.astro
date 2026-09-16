@@ -1,0 +1,35 @@
+---
+const { title = 'ASAP — креативное агентство & продакшн' } = Astro.props;
+---
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="ASAP — креативное агентство & продакшн. Видео, контент, рекламные кампании 360, документальные сериалы." />
+    <title>{title}</title>
+    <style is:inline>
+      @font-face {
+        font-weight: 400;
+        font-family: 'custom_87492';
+        font-style: normal;
+        src: url('/fonts/grtsk-peta.ttf') format('truetype');
+      }
+      @font-face {
+        font-weight: 500;
+        font-family: 'custom_94511';
+        font-style: normal;
+        src: url('/fonts/pp-neue-montreal-500.otf') format('opentype');
+      }
+      @font-face {
+        font-weight: 700;
+        font-family: 'custom_94511';
+        font-style: normal;
+        src: url('/fonts/pp-neue-montreal-700.otf') format('opentype');
+      }
+    </style>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

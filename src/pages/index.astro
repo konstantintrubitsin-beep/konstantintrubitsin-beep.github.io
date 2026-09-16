@@ -1,0 +1,75 @@
+---
+import Base from '../layouts/Base.astro';
+import mediaData from '../data/noah-media.json';
+
+const navigation = [
+  ['photographs', 'Photographs'],
+  ['objects', 'Objects'],
+  ['books', 'Books'],
+  ['installation', 'Installation'],
+  ['video', 'Videos'],
+  ['observations', 'Observations'],
+  ['lectures', 'Lectures'],
+  ['music', 'Music'],
+  ['bio', 'Bio'],
+];
+---
+
+<Base title="Noah Dillon">
+  <nav class="site-nav" aria-label="Primary navigation">
+    {navigation.map(([path, label]) => <a href={`/${path}`}>{label}</a>)}
+  </nav>
+
+  <main class="home-main">
+    <div class="home-spacer" aria-hidden="true"></div>
+    <section class="home-grid" id="home-grid" aria-label="Selected works">
+      {mediaData.items.map((item) => (
+        <a class="work-link" href={`/${item.category}?id=${item.sourceId}`}>
+          <img src={item.src} alt={`${item.category} media`} width="600" height="450" loading="lazy" />
+        </a>
+      ))}
+    </section>
+    <div class="home-gutter" aria-hidden="true"></div>
+  </main>
+
+  <script>
+    const legacyCategory = new URLSearchParams(window.location.search).get('category');
+    const mediaPages = new Set(['photographs', 'objects', 'books', 'installation', 'video', 'lectures', 'music']);
+
+    if (mediaPages.has(legacyCategory)) {
+      window.location.replace(`/${legacyCategory}`);
+    }
+
+    const grid = document.querySelector('#home-grid');
+    const cards = [...grid.children];
+
+    for (let index = cards.length - 1; index > 0; index -= 1) {
+      const replacement = Math.floor(Math.random() * (index + 1));
+      [cards[index], cards[replacement]] = [cards[replacement], cards[index]];
+    }
+
+    cards.forEach((card) => grid.append(card));
+
+    const batchSize = 80;
+    let visibleCount = batchSize;
+    const sentinel = document.createElement('div');
+
+    cards.forEach((card, index) => {
+      card.hidden = index >= visibleCount;
+    });
+    grid.append(sentinel);
+
+    const observer = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting || visibleCount >= cards.length) return;
+
+      window.setTimeout(() => {
+        cards.slice(visibleCount, visibleCount + batchSize).forEach((card) => {
+          card.hidden = false;
+        });
+        visibleCount += batchSize;
+      }, 300);
+    }, { rootMargin: '200px', threshold: .1 });
+
+    observer.observe(sentinel);
+  </script>
+</Base>

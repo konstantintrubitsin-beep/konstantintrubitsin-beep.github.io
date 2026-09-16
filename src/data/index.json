@@ -1,0 +1,170 @@
+[
+ {
+  "uri": "1",
+  "slug": "",
+  "title": "",
+  "height": 2773,
+  "widgets": 377
+ },
+ {
+  "uri": "about",
+  "slug": "about",
+  "title": "about",
+  "height": 2716,
+  "widgets": 162
+ },
+ {
+  "uri": "aiforbrands",
+  "slug": "aiforbrands",
+  "title": "AI for Brands",
+  "height": 4772,
+  "widgets": 107
+ },
+ {
+  "uri": "artists",
+  "slug": "artists",
+  "title": "artists",
+  "height": 5615,
+  "widgets": 106
+ },
+ {
+  "uri": "beam",
+  "slug": "beam",
+  "title": "beam",
+  "height": 4718,
+  "widgets": 91
+ },
+ {
+  "uri": "beauty-bomb",
+  "slug": "beauty-bomb",
+  "title": "beauty bomb",
+  "height": 4005,
+  "widgets": 96
+ },
+ {
+  "uri": "brands",
+  "slug": "brands",
+  "title": "brands",
+  "height": 2585,
+  "widgets": 83
+ },
+ {
+  "uri": "contacts",
+  "slug": "contacts",
+  "title": "contacts",
+  "height": 400,
+  "widgets": 38
+ },
+ {
+  "uri": "garment",
+  "slug": "garment",
+  "title": "garment",
+  "height": 5886,
+  "widgets": 100
+ },
+ {
+  "uri": "kiosk",
+  "slug": "kiosk",
+  "title": "kiosk",
+  "height": 3382,
+  "widgets": 89
+ },
+ {
+  "uri": "logofolio",
+  "slug": "logofolio",
+  "title": "logofolio",
+  "height": 5538,
+  "widgets": 105
+ },
+ {
+  "uri": "lookonline",
+  "slug": "lookonline",
+  "title": "look online",
+  "height": 3166,
+  "widgets": 90
+ },
+ {
+  "uri": "maskoholic",
+  "slug": "maskoholic",
+  "title": "maskoholic",
+  "height": 4523,
+  "widgets": 103
+ },
+ {
+  "uri": "pari-fest",
+  "slug": "pari-fest",
+  "title": "pari fest",
+  "height": 5392,
+  "widgets": 113
+ },
+ {
+  "uri": "pellehotels",
+  "slug": "pellehotels",
+  "title": "pellehotels",
+  "height": 3779,
+  "widgets": 94
+ },
+ {
+  "uri": "rebirthoffears",
+  "slug": "rebirthoffears",
+  "title": "rebirth of fears",
+  "height": 3676,
+  "widgets": 89
+ },
+ {
+  "uri": "russianfarytales",
+  "slug": "russianfarytales",
+  "title": "russian fary tales",
+  "height": 2705,
+  "widgets": 81
+ },
+ {
+  "uri": "sababa",
+  "slug": "sababa",
+  "title": "sababa",
+  "height": 3325,
+  "widgets": 83
+ },
+ {
+  "uri": "taketwo",
+  "slug": "taketwo",
+  "title": "taketwo",
+  "height": 3846,
+  "widgets": 92
+ },
+ {
+  "uri": "turandot",
+  "slug": "turandot",
+  "title": "turandot",
+  "height": 3332,
+  "widgets": 79
+ },
+ {
+  "uri": "unprincipled",
+  "slug": "unprincipled",
+  "title": "Unprincipled",
+  "height": 4410,
+  "widgets": 90
+ },
+ {
+  "uri": "video",
+  "slug": "video",
+  "title": "video",
+  "height": 2069,
+  "widgets": 79
+ },
+ {
+  "uri": "visuallanguage",
+  "slug": "visuallanguage",
+  "title": "Visual language",
+  "height": 6761,
+  "widgets": 111
+ },
+ {
+  "uri": "works",
+  "slug": "works",
+  "title": "works",
+  "height": 1984,
+  "widgets": 259
+ }
+]

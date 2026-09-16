@@ -1,0 +1,51 @@
+---
+import Base from '../layouts/Base.astro';
+import observationData from '../data/noah-observations.json';
+
+const navigation = [
+  ['photographs', 'Photographs'],
+  ['objects', 'Objects'],
+  ['books', 'Books'],
+  ['installation', 'Installation'],
+  ['video', 'Videos'],
+  ['observations', 'Observations'],
+  ['lectures', 'Lectures'],
+  ['music', 'Music'],
+  ['bio', 'Bio'],
+];
+
+---
+
+<Base title="Noah Dillon">
+  <nav class="site-nav" aria-label="Primary navigation">
+    {navigation.map(([path, label]) => <a class:list={{ active: path === 'observations' }} href={`/${path}`}>{label}</a>)}
+  </nav>
+
+  <div class="text-page">
+    <div class="text-page-content">
+      {observationData.items.map((observation, index) => (
+        <article class:list={{ 'text-entry': true, first: index === 0 }} id={`observation-${observation._id}`}>
+          <button type="button" aria-expanded="false" aria-controls={`observation-${observation._id}-content`}>{observation.title}</button>
+          <section id={`observation-${observation._id}-content`} hidden><div>{observation.text}</div></section>
+        </article>
+      ))}
+    </div>
+  </div>
+
+  <script>
+    document.querySelectorAll('.text-entry > button').forEach((button) => {
+      button.addEventListener('click', () => {
+        const section = document.querySelector(`#${button.getAttribute('aria-controls')}`);
+        const open = !section.hidden;
+        section.hidden = open;
+        button.setAttribute('aria-expanded', String(!open));
+        const url = new URL(window.location.href);
+        url.hash = open ? '' : button.parentElement.id;
+        history.pushState(null, '', url);
+      });
+    });
+
+    const target = window.location.hash.slice(1);
+    if (target) document.querySelector(`#${CSS.escape(target)} > button`)?.click();
+  </script>
+</Base>

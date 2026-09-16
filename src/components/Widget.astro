@@ -1,0 +1,103 @@
+---
+/** Один виджет Readymag: текст, фигура, картинка, слайдшоу или видео. */
+const { w } = Astro.props;
+
+const px = (v) => `${v}px`;
+const vars = [];
+if (w.d) vars.push(`--dx:${px(w.d.x)}`, `--dy:${px(w.d.y)}`, `--dw:${px(w.d.w)}`, `--dh:${px(w.d.h)}`, `--dz:${w.z}`);
+if (w.p) vars.push(`--px:${px(w.p.x)}`, `--py:${px(w.p.y)}`, `--pw:${px(w.p.w)}`, `--ph:${px(w.p.h)}`, `--pz:${w.zPhone}`);
+
+const cls = ['w', `w-${w.type}`];
+// Виджеты с якорем 'c' — оверлей мобильного меню, он скрыт до нажатия «Menu».
+if (w.fixed === 'c') cls.push('menu-layer');
+if (!w.d || w.hidden) cls.push('no-d');
+if (!w.p || w.hiddenPhone) cls.push('no-p');
+if (w.type === 'text') {
+  cls.push(`va-${w.valign}`);
+  if (w.autosize) cls.push('autoh');
+}
+if (w.type === 'shape' && w.shape === 'rectangle') cls.push('rect');
+
+const box = w.d ?? w.p ?? { w: 0, h: 0 };
+const style = vars.join(';');
+const anim = w.anim?.length ? JSON.stringify(w.anim) : null;
+---
+
+{w.type === 'text' && (
+  <div class={cls.join(' ')} style={style} data-id={w.id} data-anim={anim} set:html={w.html} />
+)}
+
+{w.type === 'shape' && w.shape === 'line' && (
+  <div class={cls.join(' ')} style={style} data-id={w.id} data-anim={anim}>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox={`0 0 ${box.w} ${box.h}`} preserveAspectRatio="none" role="presentation">
+      <path
+        d={`M0 ${box.h / 2} L${box.w} ${box.h / 2}`}
+        style={`fill:none;stroke:${w.color};stroke-width:${w.weight}`}
+        vector-effect="non-scaling-stroke"
+      />
+    </svg>
+  </div>
+)}
+
+{w.type === 'shape' && w.shape === 'rectangle' && (
+  <div
+    class={cls.join(' ')}
+    style={`${style};--shape-color:${w.color};opacity:${w.opacity};border-radius:${w.radius}px`}
+    data-id={w.id}
+    data-anim={anim}
+  />
+)}
+
+{w.type === 'shape' && w.shape === 'icon' && w.raster && (
+  <div class={cls.join(' ')} style={style} data-id={w.id} data-anim={anim}>
+    <img src={w.raster} alt="" loading="lazy" />
+  </div>
+)}
+
+{w.type === 'shape' && (w.shape === 'polygon' || (w.shape === 'icon' && !w.raster)) && (
+  <div class={cls.join(' ')} style={style} data-id={w.id} data-anim={anim}>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none" role="presentation">
+      <polygon points="50,0 100,100 0,100" style={`fill:${w.color}`} />
+    </svg>
+  </div>
+)}
+
+{w.type === 'picture' && w.src && (
+  <div class={cls.join(' ')} style={style} data-id={w.id} data-anim={anim}>
+    <img src={w.src} srcset={`${w.src} 1x, ${w.src2x} 2x`} alt="" loading="lazy" decoding="async" />
+  </div>
+)}
+
+{w.type === 'slideshow' && (
+  <div
+    class={cls.join(' ')}
+    style={`${style};--ss-speed:${w.speed}s;--fit:${w.fill ? 'cover' : 'contain'}`}
+    data-id={w.id}
+    data-anim={anim}
+    data-play={w.play}
+    data-transition={w.transition}
+    data-delay={w.delay}
+    data-fps={w.hoverFps}
+  >
+    {w.images.map((img, i) => (
+      <div class={`ss-slide${i === 0 ? ' on' : ''}`}>
+        <img src={img.src} srcset={`${img.src} 1x, ${img.src2x} 2x`} alt="" loading="lazy" decoding="async" />
+      </div>
+    ))}
+    {w.counters && w.images.length > 1 && <div class="ss-count">1/{w.images.length}</div>}
+  </div>
+)}
+
+{w.type === 'video' && (
+  <div class={cls.join(' ')} style={`${style};border-radius:${w.radius}px;overflow:hidden`} data-id={w.id} data-anim={anim}>
+    <video
+      data-src={w.src}
+      poster={w.poster ?? undefined}
+      autoplay={w.autoplay}
+      loop={w.loop}
+      muted={w.mute}
+      controls={w.controls}
+      playsinline
+    />
+  </div>
+)}

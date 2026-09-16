@@ -1,0 +1,74 @@
+---
+import Base from '../layouts/Base.astro';
+import mediaData from '../data/noah-media.json';
+
+const navigation = [
+  ['photographs', 'Photographs'],
+  ['objects', 'Objects'],
+  ['books', 'Books'],
+  ['installation', 'Installation'],
+  ['video', 'Videos'],
+  ['observations', 'Observations'],
+  ['lectures', 'Lectures'],
+  ['music', 'Music'],
+  ['bio', 'Bio'],
+];
+export function getStaticPaths() {
+  return ['photographs', 'objects', 'books', 'installation', 'video', 'lectures', 'music']
+    .map((page) => ({ params: { page } }));
+}
+
+const { page } = Astro.params;
+const items = mediaData.items
+  .filter((item) => item.category === page)
+  .sort((a, b) => {
+    if (!['photographs', 'video'].includes(page)) return 0;
+    return new Date(b.createdAt || 0).getTime() - new Date(a.createdAt || 0).getTime();
+  });
+const externalMedia = ['video', 'lectures', 'music'].includes(page);
+---
+
+<Base title="Noah Dillon">
+  <nav class="site-nav" aria-label="Primary navigation">
+    {navigation.map(([path, label]) => <a class:list={{ active: path === page }} href={`/${path}`}>{label}</a>)}
+  </nav>
+
+  <main class="collection-main">
+    <div class="collection-spacer" aria-hidden="true"></div>
+    <section class="collection-grid" aria-label={`${page} media`}>
+      {items.map((item, index) => (
+        externalMedia && item.href ? (
+          <a
+            class="collection-media"
+            id={`target-${item.sourceId}`}
+            href={item.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={`aspect-ratio: ${item.width || 800} / ${item.height || 600}`}
+          >
+            <img src={item.src} alt={`Image ${index}`} loading="lazy" />
+          </a>
+        ) : (
+          <div
+            class="collection-media"
+            id={`target-${item.sourceId}`}
+            style={`aspect-ratio: ${item.width || 800} / ${item.height || 600}`}
+          >
+            <img src={item.src} alt={`Image ${index}`} loading="lazy" />
+          </div>
+        )
+      ))}
+    </section>
+    <div class="collection-gutter" aria-hidden="true"></div>
+  </main>
+
+  <script>
+    const id = new URLSearchParams(window.location.search).get('id');
+
+    if (id) {
+      window.setTimeout(() => {
+        document.querySelector(`#target-${CSS.escape(id)}`)?.scrollIntoView({ behavior: 'auto', block: 'center' });
+      }, 300);
+    }
+  </script>
+</Base>
