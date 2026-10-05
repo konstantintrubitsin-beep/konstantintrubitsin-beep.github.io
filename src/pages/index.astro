@@ -1,40 +1,38 @@
 ---
 import Base from '../layouts/Base.astro';
+import MediaCard from '../components/MediaCard.astro';
 import mediaData from '../data/noah-media.json';
 
 const navigation = [
-  ['photographs', 'Photographs'],
-  ['objects', 'Objects'],
-  ['books', 'Books'],
-  ['installation', 'Installation'],
-  ['video', 'Videos'],
-  ['observations', 'Observations'],
-  ['lectures', 'Lectures'],
-  ['music', 'Music'],
+  ['photographs', 'Commerce'],
+  ['', 'Art'],
   ['bio', 'Bio'],
 ];
+
+const artItems = mediaData.items.filter((item) => {
+  const isCommerceVideo = item.mediaType === 'video'
+    && (item.id === 'photographs-001' || item.id === 'photographs-002' || item.id.startsWith('commerce-'));
+
+  return !isCommerceVideo;
+});
 ---
 
-<Base title="Noah Dillon">
+<Base title="Konstantin Trubitsin">
   <nav class="site-nav" aria-label="Primary navigation">
     {navigation.map(([path, label]) => <a href={`/${path}`}>{label}</a>)}
   </nav>
 
   <main class="home-main">
     <div class="home-spacer" aria-hidden="true"></div>
-    <section class="home-grid" id="home-grid" aria-label="Selected works">
-      {mediaData.items.map((item) => (
-        <a class="work-link" href={`/${item.category}?id=${item.sourceId}`}>
-          <img src={item.src} alt={`${item.category} media`} width="600" height="450" loading="lazy" />
-        </a>
-      ))}
+    <section class="home-grid media-gallery" id="home-grid" data-media-gallery aria-label="Selected works">
+      {artItems.map((item, index) => <MediaCard {item} {index} />)}
     </section>
     <div class="home-gutter" aria-hidden="true"></div>
   </main>
 
   <script>
     const legacyCategory = new URLSearchParams(window.location.search).get('category');
-    const mediaPages = new Set(['photographs', 'objects', 'books', 'installation', 'video', 'lectures', 'music']);
+    const mediaPages = new Set(['photographs']);
 
     if (mediaPages.has(legacyCategory)) {
       window.location.replace(`/${legacyCategory}`);

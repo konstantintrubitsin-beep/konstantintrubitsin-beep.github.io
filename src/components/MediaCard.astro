@@ -1,0 +1,20 @@
+---
+const { item, index = 0, selected = false } = Astro.props;
+const label = item.label || `${item.category} media ${index + 1}`;
+---
+
+<button
+  type="button"
+  class:list={['media-card', { 'is-selected': selected }]}
+  data-media-card
+  data-media-caption={item.caption || ''}
+  id={`target-${item.sourceId}`}
+  aria-label={`Open ${label}`}
+  style={`aspect-ratio: ${item.width || 800} / ${item.height || 600}`}
+>
+  {item.mediaType === 'video' ? (
+    <video src={item.src} autoplay muted loop playsinline preload="metadata" aria-label={label} />
+  ) : (
+    <img src={item.src} alt={label} loading="lazy" />
+  )}
+</button>

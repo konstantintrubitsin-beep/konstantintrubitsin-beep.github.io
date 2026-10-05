@@ -1,20 +1,15 @@
 ---
 import Base from '../layouts/Base.astro';
+import MediaCard from '../components/MediaCard.astro';
 import mediaData from '../data/noah-media.json';
 
 const navigation = [
-  ['photographs', 'Photographs'],
-  ['objects', 'Objects'],
-  ['books', 'Books'],
-  ['installation', 'Installation'],
-  ['video', 'Videos'],
-  ['observations', 'Observations'],
-  ['lectures', 'Lectures'],
-  ['music', 'Music'],
+  ['photographs', 'Commerce'],
+  ['', 'Art'],
   ['bio', 'Bio'],
 ];
 export function getStaticPaths() {
-  return ['photographs', 'objects', 'books', 'installation', 'video', 'lectures', 'music']
+  return ['photographs']
     .map((page) => ({ params: { page } }));
 }
 
@@ -25,50 +20,74 @@ const items = mediaData.items
     if (!['photographs', 'video'].includes(page)) return 0;
     return new Date(b.createdAt || 0).getTime() - new Date(a.createdAt || 0).getTime();
   });
-const externalMedia = ['video', 'lectures', 'music'].includes(page);
+
+const rubrikItem = items.find((item) => item.id === 'photographs-002');
+const rocketbankItem = items.find((item) => item.id === 'commerce-020');
+const rubrikDetailIds = new Set(['commerce-003', 'commerce-004', 'commerce-005', 'commerce-006']);
+const rubrikDetails = items.filter((item) => rubrikDetailIds.has(item.id));
+const devfestItem = items.find((item) => item.id === 'commerce-007');
+const devfestDetailIds = new Set(['commerce-008', 'commerce-009', 'commerce-010', 'commerce-011']);
+const devfestDetails = items.filter((item) => devfestDetailIds.has(item.id));
+const aspaVideoIds = [
+  'commerce-015', // Королевский лотос
+  'commerce-012', // Масло миндаль
+  'commerce-018', // Нежный кокос
+  'commerce-019', // Масло клюква и золотая аргана
+  'commerce-016', // Спа-водоросли
+  'commerce-014', // Кремовый скраб клюква и золотая аргана
+  'commerce-017', // Кремовая маска клюква и золотая аргана
+  'commerce-013', // Сахарный скраб тропический манго
+];
+const aspaVideos = aspaVideoIds
+  .map((id) => items.find((item) => item.id === id))
+  .filter(Boolean);
+const aspaLeadVideo = aspaVideos[0];
+const aspaSecondaryVideos = aspaVideos.slice(1);
+const commerceItems = items.filter((item) => (
+  item !== rubrikItem
+  && item !== rocketbankItem
+  && item !== devfestItem
+  && !rubrikDetailIds.has(item.id)
+  && !devfestDetailIds.has(item.id)
+  && !aspaVideoIds.includes(item.id)
+));
 ---
 
-<Base title="Noah Dillon">
+<Base title="Konstantin Trubitsin">
   <nav class="site-nav" aria-label="Primary navigation">
     {navigation.map(([path, label]) => <a class:list={{ active: path === page }} href={`/${path}`}>{label}</a>)}
   </nav>
 
   <main class="collection-main">
     <div class="collection-spacer" aria-hidden="true"></div>
-    <section class="collection-grid" aria-label={`${page} media`}>
-      {items.map((item, index) => (
-        externalMedia && item.href ? (
-          <a
-            class="collection-media"
-            id={`target-${item.sourceId}`}
-            href={item.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            style={`aspect-ratio: ${item.width || 800} / ${item.height || 600}`}
-          >
-            <img src={item.src} alt={`Image ${index}`} loading="lazy" />
-          </a>
-        ) : (
-          <div
-            class="collection-media"
-            id={`target-${item.sourceId}`}
-            style={`aspect-ratio: ${item.width || 800} / ${item.height || 600}`}
-          >
-            <img src={item.src} alt={`Image ${index}`} loading="lazy" />
+    <section class="collection-grid media-gallery" data-media-gallery aria-label={`${page} media`}>
+      {page === 'photographs' && rubrikItem ? (
+        <>
+          {commerceItems.slice(0, 1).map((item, index) => <MediaCard {item} {index} />)}
+          {rocketbankItem && <MediaCard item={rocketbankItem} index={1} />}
+          <MediaCard item={rubrikItem} index={2} />
+          <div class="commerce-secondary-grid">
+            {rubrikDetails.map((item, index) => <MediaCard {item} {index} />)}
           </div>
-        )
-      ))}
+          {devfestItem && <MediaCard item={devfestItem} index={3} />}
+          {devfestDetails.length > 0 && (
+            <div class="commerce-secondary-grid devfest-secondary-grid">
+              {devfestDetails.map((item, index) => <MediaCard {item} {index} />)}
+            </div>
+          )}
+          {aspaLeadVideo && <MediaCard item={aspaLeadVideo} index={4} />}
+          {aspaSecondaryVideos.length > 0 && (
+            <div class="commerce-secondary-grid aspa-secondary-grid">
+              {aspaSecondaryVideos.map((item, index) => <MediaCard {item} index={index + 5} />)}
+            </div>
+          )}
+          {commerceItems.slice(1).map((item, index) => <MediaCard {item} index={index + 2} />)}
+        </>
+      ) : (
+        items.map((item, index) => <MediaCard {item} {index} />)
+      )}
     </section>
     <div class="collection-gutter" aria-hidden="true"></div>
   </main>
 
-  <script>
-    const id = new URLSearchParams(window.location.search).get('id');
-
-    if (id) {
-      window.setTimeout(() => {
-        document.querySelector(`#target-${CSS.escape(id)}`)?.scrollIntoView({ behavior: 'auto', block: 'center' });
-      }, 300);
-    }
-  </script>
 </Base>

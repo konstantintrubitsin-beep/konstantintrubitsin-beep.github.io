@@ -2,43 +2,40 @@
 import Base from '../layouts/Base.astro';
 
 const navigation = [
-  ['photographs', 'Photographs'],
-  ['objects', 'Objects'],
-  ['books', 'Books'],
-  ['installation', 'Installation'],
-  ['video', 'Videos'],
-  ['observations', 'Observations'],
-  ['lectures', 'Lectures'],
-  ['music', 'Music'],
+  ['photographs', 'Commerce'],
+  ['', 'Art'],
   ['bio', 'Bio'],
 ];
 ---
 
-<Base title="Noah Dillon">
+<Base title="Konstantin Trubitsin — Биография">
   <nav class="site-nav" aria-label="Primary navigation">
     {navigation.map(([path, label]) => <a class:list={{ active: path === 'bio' }} href={`/${path}`}>{label}</a>)}
   </nav>
 
   <div class="text-page">
     <div class="text-page-content bio-content">
-      <div>Noah Dillon</div>
+      <div>Константин Трубицин</div>
       <br /><br />
-      <div>Born in Durango, Colorado.<br />Lives and works in Los Angeles.</div>
+      <div>Живу и работаю в Омске, Россия.</div>
       <br />
-      <div>Artist. Photographer. Director. Musician.</div>
+      <div>Designer, AI-creator &amp; AI-filmmaker.</div>
       <br />
-      <div>Founder of the band "The Hellp."</div>
+      <div>Два года коммерческого опыта в роли дизайнера и AI-креатора в проектах.</div>
       <br />
-      <div>Yale Poynter Fellow</div>
-      <br /><br />
-      <div>Selected clients</div>
+      <div>Клиенты</div>
       <br />
       <div>
-        Gucci<br />Nike<br />Louis Vuitton<br />Maison Martin Margiela<br />Versace<br />The Weeknd<br />Dion Lee<br />SSENSE<br />Shayne Oliver<br />Off White<br />The North Face<br />Rosalía<br />Bianca Censori
+        <a href="https://rocketbank.ru/?utm_referrer=https%3A%2F%2Fwww.google.com%2F" target="_blank" rel="noreferrer">Рокетбанк</a><br />
+        <a href="https://rubrick.ru" target="_blank" rel="noreferrer">Рубрик</a><br />
+        <a href="https://www.devfest.ru" target="_blank" rel="noreferrer">ДевФест</a><br />
+        <a href="https://seasoned.ru" target="_blank" rel="noreferrer">Seasoned</a>
         <br /><br />
-        <a href="mailto:noahpdillon@gmail.com">noahpdillon@gmail.com</a>
+        Telegram: <a href="https://t.me/konstantrubitsin" target="_blank" rel="noreferrer">@konstantrubitsin</a>
+        <br />
+        Email: <a href="mailto:kosta.trubitzin@gmail.com">kosta.trubitzin@gmail.com</a>
         <br /><br />
-        <a href="https://interno9.ch" target="_blank" rel="noreferrer">Developed by interno9.ch</a>
+        <a href="/konstantin-trubitsin-resume.pdf" download>Скачать резюме</a>
       </div>
     </div>
   </div>

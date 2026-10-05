@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
-const { title = 'Noah Dillon — Selected Works' } = Astro.props;
+import MediaDialog from '../components/MediaDialog.astro';
+const { title = 'Konstantin Trubitsin — Selected Works' } = Astro.props;
 ---
 
 <!doctype html>
@@ -8,10 +9,97 @@ const { title = 'Noah Dillon — Selected Works' } = Astro.props;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Noah Dillon — artist, photographer, director, and musician." />
+    <meta name="description" content="Konstantin Trubitsin — designer, AI creator, and AI filmmaker." />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <title>{title}</title>
   </head>
   <body>
     <slot />
+    <MediaDialog />
+    <script>
+      document.querySelectorAll('[data-media-gallery]').forEach((gallery) => {
+        const cards = [...gallery.querySelectorAll('[data-media-card]')];
+
+        const clearActiveCard = () => {
+          gallery.classList.remove('is-hovering');
+          cards.forEach((card) => card.classList.remove('is-hovered'));
+        };
+
+        const setActiveCard = (card) => {
+          gallery.classList.add('is-hovering');
+          cards.forEach((candidate) => candidate.classList.toggle('is-hovered', candidate === card));
+        };
+
+        gallery.addEventListener('pointerover', (event) => {
+          if (event.pointerType === 'touch' || !(event.target instanceof Element)) return;
+          const card = event.target.closest('[data-media-card]');
+          const relatedTarget = event.relatedTarget instanceof Node ? event.relatedTarget : null;
+
+          if (card && !card.contains(relatedTarget)) setActiveCard(card);
+        });
+
+        gallery.addEventListener('pointerout', (event) => {
+          if (!(event.target instanceof Element)) return;
+          const card = event.target.closest('[data-media-card]');
+          const relatedTarget = event.relatedTarget instanceof Node ? event.relatedTarget : null;
+
+          if (card && !card.contains(relatedTarget)) clearActiveCard();
+        });
+
+        gallery.addEventListener('focusin', (event) => {
+          if (event.target instanceof Element) {
+            const card = event.target.closest('[data-media-card]');
+            if (card) setActiveCard(card);
+          }
+        });
+
+        gallery.addEventListener('focusout', () => {
+          window.setTimeout(() => {
+            if (!gallery.contains(document.activeElement)) clearActiveCard();
+          });
+        });
+      });
+
+      const dialog = document.querySelector('#media-dialog');
+      const dialogContent = dialog?.querySelector('[data-media-dialog-content]');
+      const dialogCaption = dialog?.querySelector('[data-media-dialog-caption]');
+      let activeCard = null;
+
+      const clearDialog = () => {
+        dialogContent?.replaceChildren();
+        if (dialogCaption instanceof HTMLElement) {
+          dialogCaption.hidden = true;
+          dialogCaption.textContent = '';
+        }
+        activeCard?.focus();
+        activeCard = null;
+      };
+
+      const openDialog = (card) => {
+        if (!(dialog instanceof HTMLDialogElement) || !dialogContent) return;
+
+        const media = card.querySelector('img, video');
+        if (!media) return;
+
+        activeCard = card;
+        if (dialogCaption instanceof HTMLElement) {
+          const caption = card.dataset.mediaCaption || '';
+          dialogCaption.hidden = !caption;
+          dialogCaption.textContent = caption;
+        }
+        dialogContent.replaceChildren(media.cloneNode(true));
+        const video = dialogContent.querySelector('video');
+        if (video instanceof HTMLVideoElement) video.controls = true;
+        video?.play().catch(() => {});
+        dialog.showModal();
+      };
+
+      document.querySelectorAll('[data-media-card]').forEach((card) => {
+        card.addEventListener('click', () => openDialog(card));
+      });
+
+      dialog?.addEventListener('click', () => dialog.close());
+      dialog?.addEventListener('close', clearDialog);
+    </script>
   </body>
 </html>
