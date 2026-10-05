@@ -54,6 +54,13 @@ button { color: inherit; font: inherit; }
 .site-nav a:hover,
 .site-nav a.active { text-decoration: underline; }
 
+@media (max-width: 639px) {
+  .site-nav {
+    top: 0;
+    left: 0;
+  }
+}
+
 .home-main,
 .collection-main {
   display: grid;
