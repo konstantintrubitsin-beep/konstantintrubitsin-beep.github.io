@@ -118,19 +118,6 @@
       "createdAt": null
     },
     {
-      "id": "commerce-010",
-      "category": "photographs",
-      "label": "Лари Пейдж — ДевФест 26",
-      "caption": "ДевФест",
-      "mediaType": "video",
-      "src": "/media/noah/commerce-010.mp4",
-      "href": null,
-      "sourceId": "larry-page-devfest-26",
-      "width": 1080,
-      "height": 1920,
-      "createdAt": null
-    },
-    {
       "id": "commerce-011",
       "category": "photographs",
       "label": "Промокод — Павел Дуров",
