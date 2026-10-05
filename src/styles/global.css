@@ -173,7 +173,7 @@ button { color: inherit; font: inherit; }
   min-width: 0;
 }
 
-.devfest-secondary-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.devfest-secondary-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .aspa-secondary-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 
 .text-page {
