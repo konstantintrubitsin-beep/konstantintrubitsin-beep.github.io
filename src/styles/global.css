@@ -182,7 +182,7 @@ button { color: inherit; font: inherit; }
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
   gap: 1rem;
-  margin-top: 16rem;
+  margin-top: 3rem;
   margin-bottom: 16rem;
   font-size: .875rem;
   font-weight: 700;
@@ -226,6 +226,8 @@ button { color: inherit; font: inherit; }
     margin: 0;
     padding: .125rem .25rem;
   }
+
+  .text-page { margin-top: 16rem; }
 
   .home-main { grid-template-columns: repeat(6, minmax(0, 1fr)); }
   .home-spacer { display: block; grid-column: span 1 / span 1; }
