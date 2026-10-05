@@ -1,6 +1,9 @@
 ---
 const { item, index = 0, selected = false } = Astro.props;
 const label = item.label || `${item.category} media ${index + 1}`;
+const poster = item.mediaType === 'video'
+  ? `/media/posters/video/${item.src.split('/').at(-1)?.replace(/\.[^.]+$/, '.jpg')}`
+  : null;
 ---
 
 <button
@@ -13,7 +16,7 @@ const label = item.label || `${item.category} media ${index + 1}`;
   style={`aspect-ratio: ${item.width || 800} / ${item.height || 600}`}
 >
   {item.mediaType === 'video' ? (
-    <video src={item.src} autoplay muted loop playsinline preload="metadata" aria-label={label} />
+    <video data-video-src={item.src} poster={poster} autoplay muted loop playsinline preload="none" aria-label={label} />
   ) : (
     <img src={item.src} alt={label} loading="lazy" />
   )}

@@ -17,6 +17,29 @@ const { title = 'Konstantin Trubitsin — Selected Works' } = Astro.props;
     <slot />
     <MediaDialog />
     <script>
+      const loadVideo = (video) => {
+        if (!(video instanceof HTMLVideoElement) || video.getAttribute('src') || !video.dataset.videoSrc) return;
+
+        video.src = video.dataset.videoSrc;
+        video.load();
+        video.play().catch(() => {});
+      };
+
+      const videos = [...document.querySelectorAll('video[data-video-src]')];
+      if ('IntersectionObserver' in window) {
+        const videoObserver = new IntersectionObserver((entries, observer) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            loadVideo(entry.target);
+            observer.unobserve(entry.target);
+          });
+        }, { rootMargin: '800px 0px' });
+
+        videos.forEach((video) => videoObserver.observe(video));
+      } else {
+        videos.forEach(loadVideo);
+      }
+
       document.querySelectorAll('[data-media-gallery]').forEach((gallery) => {
         const cards = [...gallery.querySelectorAll('[data-media-card]')];
 
@@ -89,8 +112,10 @@ const { title = 'Konstantin Trubitsin — Selected Works' } = Astro.props;
         }
         dialogContent.replaceChildren(media.cloneNode(true));
         const video = dialogContent.querySelector('video');
-        if (video instanceof HTMLVideoElement) video.controls = true;
-        video?.play().catch(() => {});
+        if (video instanceof HTMLVideoElement) {
+          video.controls = true;
+          loadVideo(video);
+        }
         dialog.showModal();
       };
 
