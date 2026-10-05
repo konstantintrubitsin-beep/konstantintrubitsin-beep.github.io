@@ -9,7 +9,7 @@ const navigation = [
   ['bio', 'Bio'],
 ];
 
-const featuredItems = mediaData.items;
+const featuredItems = mediaData.items.filter((item) => item.category === 'art');
 ---
 
 <Base title="Konstantin Trubitsin">

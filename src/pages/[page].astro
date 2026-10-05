@@ -16,6 +16,7 @@ export function getStaticPaths() {
 const { page } = Astro.params;
 const items = mediaData.items
   .filter((item) => item.category === page)
+  .filter((item) => item.caption !== 'AspA Love')
   .sort((a, b) => {
     if (!['photographs', 'video'].includes(page)) return 0;
     return new Date(b.createdAt || 0).getTime() - new Date(a.createdAt || 0).getTime();
@@ -23,6 +24,8 @@ const items = mediaData.items
 
 const rubrikItem = items.find((item) => item.id === 'photographs-002');
 const rocketbankItem = items.find((item) => item.id === 'commerce-020');
+const rocketbankDetailIds = new Set(['commerce-021', 'commerce-022']);
+const rocketbankDetails = items.filter((item) => rocketbankDetailIds.has(item.id));
 const rubrikDetailIds = new Set(['commerce-003', 'commerce-004', 'commerce-005', 'commerce-006']);
 const rubrikDetails = items.filter((item) => rubrikDetailIds.has(item.id));
 const devfestItem = items.find((item) => item.id === 'commerce-007');
@@ -46,6 +49,7 @@ const aspaSecondaryVideos = aspaVideos.slice(1);
 const commerceItems = items.filter((item) => (
   item !== rubrikItem
   && item !== rocketbankItem
+  && !rocketbankDetailIds.has(item.id)
   && item !== devfestItem
   && !rubrikDetailIds.has(item.id)
   && !devfestDetailIds.has(item.id)
@@ -65,6 +69,11 @@ const commerceItems = items.filter((item) => (
         <>
           {commerceItems.slice(0, 1).map((item, index) => <MediaCard {item} {index} />)}
           {rocketbankItem && <MediaCard item={rocketbankItem} index={1} />}
+          {rocketbankDetails.length > 0 && (
+            <div class="commerce-secondary-grid">
+              {rocketbankDetails.map((item, index) => <MediaCard {item} index={index + 2} />)}
+            </div>
+          )}
           <MediaCard item={rubrikItem} index={2} />
           <div class="commerce-secondary-grid">
             {rubrikDetails.map((item, index) => <MediaCard {item} {index} />)}

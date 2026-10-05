@@ -510,6 +510,32 @@
       "width": 720,
       "height": 1280,
       "createdAt": null
+    },
+    {
+      "id": "commerce-021",
+      "category": "photographs",
+      "label": "Рокетбанк (ФИТ) 002",
+      "caption": "Рокетбанк (ФИТ)",
+      "mediaType": "video",
+      "src": "/media/noah/commerce-021.mp4",
+      "href": null,
+      "sourceId": "rocketbank-fit-002",
+      "width": 1280,
+      "height": 720,
+      "createdAt": null
+    },
+    {
+      "id": "commerce-022",
+      "category": "photographs",
+      "label": "Рокетбанк (ФИТ) 003",
+      "caption": "Рокетбанк (ФИТ)",
+      "mediaType": "video",
+      "src": "/media/noah/commerce-022.mp4",
+      "href": null,
+      "sourceId": "rocketbank-fit-003",
+      "width": 1280,
+      "height": 720,
+      "createdAt": null
     }
   ]
 }
