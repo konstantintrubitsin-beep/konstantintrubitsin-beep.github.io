@@ -56,8 +56,14 @@ button { color: inherit; font: inherit; }
 
 @media (max-width: 639px) {
   .site-nav {
-    top: 0;
-    left: 0;
+    position: relative;
+    top: auto;
+    left: auto;
+    flex-direction: row;
+    gap: .75rem;
+    width: auto;
+    margin: 1rem 1rem 0;
+    padding: 0;
   }
 }
 
