@@ -207,12 +207,9 @@ button { color: inherit; font: inherit; }
 .bio-content { margin-top: 1rem; }
 
 .bio-portrait {
-  position: fixed;
-  z-index: 100;
-  top: 1rem;
-  right: 1rem;
-  width: auto;
-  height: 4.5rem;
+  width: 9.25rem;
+  height: auto;
+  margin-bottom: 1rem;
 }
 
 @keyframes fade-in {
