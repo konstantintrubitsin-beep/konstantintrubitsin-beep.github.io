@@ -206,11 +206,6 @@ button { color: inherit; font: inherit; }
 .text-entry section > div { margin-left: 1rem; white-space: pre-wrap; }
 .bio-content { margin-top: 1rem; }
 
-.bio-portrait {
-  width: 9.25rem;
-  height: auto;
-  margin-bottom: 1rem;
-}
 
 @keyframes fade-in {
   from { opacity: 0; }
