@@ -12,6 +12,7 @@ const navigation = [
   <nav class="site-nav" aria-label="Primary navigation">
     {navigation.map(([path, label]) => <a class:list={{ active: path === 'bio' }} href={`/${path}`}>{label}</a>)}
   </nav>
+  <img class="bio-portrait" src="/media/posters/konstantin-portrait-2026.jpeg" alt="Портрет Константина Трубицина" />
 
   <div class="text-page">
     <div class="text-page-content bio-content">
