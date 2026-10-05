@@ -32,16 +32,18 @@ video { display: block; width: 100%; height: auto; }
 button { color: inherit; font: inherit; }
 
 .site-nav {
-  position: fixed;
+  position: relative;
   z-index: 100;
-  top: 1rem;
-  left: 1rem;
+  top: auto;
+  left: auto;
   display: flex;
-  flex-direction: column;
-  gap: .25rem;
+  flex-direction: row;
+  justify-content: center;
+  gap: .75rem;
   color: #000;
-  width: max-content;
-  padding: .125rem .25rem;
+  width: auto;
+  margin: 1rem 1rem 0;
+  padding: 0;
   background: #fff;
   opacity: 1;
   visibility: visible;
@@ -53,20 +55,6 @@ button { color: inherit; font: inherit; }
 
 .site-nav a:hover,
 .site-nav a.active { text-decoration: underline; }
-
-@media (max-width: 639px) {
-  .site-nav {
-    position: relative;
-    top: auto;
-    left: auto;
-    flex-direction: row;
-    justify-content: center;
-    gap: .75rem;
-    width: auto;
-    margin: 1rem 1rem 0;
-    padding: 0;
-  }
-}
 
 .home-main,
 .collection-main {
@@ -227,6 +215,18 @@ button { color: inherit; font: inherit; }
 }
 
 @media (min-width: 640px) {
+  .site-nav {
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: .25rem;
+    width: max-content;
+    margin: 0;
+    padding: .125rem .25rem;
+  }
+
   .home-main { grid-template-columns: repeat(6, minmax(0, 1fr)); }
   .home-spacer { display: block; grid-column: span 1 / span 1; }
   .home-grid { grid-column: span 5 / span 5; grid-template-columns: repeat(3, minmax(0, 1fr)); }
