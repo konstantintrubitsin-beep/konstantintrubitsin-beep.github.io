@@ -60,6 +60,7 @@ button { color: inherit; font: inherit; }
     top: auto;
     left: auto;
     flex-direction: row;
+    justify-content: center;
     gap: .75rem;
     width: auto;
     margin: 1rem 1rem 0;
