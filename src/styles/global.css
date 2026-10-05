@@ -209,6 +209,7 @@ button { color: inherit; font: inherit; }
 .bio-content {
   grid-column: 1 / -1;
   margin-top: 1rem;
+  padding: 0 1rem;
 }
 
 
@@ -231,7 +232,10 @@ button { color: inherit; font: inherit; }
   }
 
   .text-page { margin-top: 16rem; }
-  .bio-content { grid-column: 4 / span 8; }
+  .bio-content {
+    grid-column: 4 / span 8;
+    padding: 0;
+  }
 
   .home-main { grid-template-columns: repeat(6, minmax(0, 1fr)); }
   .home-spacer { display: block; grid-column: span 1 / span 1; }
