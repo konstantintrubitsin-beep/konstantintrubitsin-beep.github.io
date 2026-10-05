@@ -32,9 +32,9 @@ video { display: block; width: 100%; height: auto; }
 button { color: inherit; font: inherit; }
 
 .site-nav {
-  position: relative;
+  position: sticky;
   z-index: 100;
-  top: auto;
+  top: 0;
   left: auto;
   display: flex;
   flex-direction: row;
