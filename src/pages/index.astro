@@ -9,12 +9,7 @@ const navigation = [
   ['bio', 'Bio'],
 ];
 
-const artItems = mediaData.items.filter((item) => {
-  const isCommerceVideo = item.mediaType === 'video'
-    && (item.id === 'photographs-001' || item.id === 'photographs-002' || item.id.startsWith('commerce-'));
-
-  return !isCommerceVideo;
-});
+const featuredItems = mediaData.items;
 ---
 
 <Base title="Konstantin Trubitsin">
@@ -24,8 +19,8 @@ const artItems = mediaData.items.filter((item) => {
 
   <main class="home-main">
     <div class="home-spacer" aria-hidden="true"></div>
-    <section class="home-grid media-gallery" id="home-grid" data-media-gallery aria-label="Selected works">
-      {artItems.map((item, index) => <MediaCard {item} {index} />)}
+    <section class="home-grid media-gallery" id="home-grid" data-media-gallery aria-label="All works">
+      {featuredItems.map((item, index) => <MediaCard {item} {index} />)}
     </section>
     <div class="home-gutter" aria-hidden="true"></div>
   </main>
