@@ -206,7 +206,10 @@ button { color: inherit; font: inherit; }
 }
 .text-entry section { max-width: 720px; margin-top: .5rem; }
 .text-entry section > div { margin-left: 1rem; white-space: pre-wrap; }
-.bio-content { margin-top: 1rem; }
+.bio-content {
+  grid-column: 1 / -1;
+  margin-top: 1rem;
+}
 
 
 @keyframes fade-in {
@@ -228,6 +231,7 @@ button { color: inherit; font: inherit; }
   }
 
   .text-page { margin-top: 16rem; }
+  .bio-content { grid-column: 4 / span 8; }
 
   .home-main { grid-template-columns: repeat(6, minmax(0, 1fr)); }
   .home-spacer { display: block; grid-column: span 1 / span 1; }
