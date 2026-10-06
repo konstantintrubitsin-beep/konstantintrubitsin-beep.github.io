@@ -20,9 +20,19 @@ const { title = 'Konstantin Trubitsin — Selected Works' } = Astro.props;
       const loadVideo = (video) => {
         if (!(video instanceof HTMLVideoElement) || video.getAttribute('src') || !video.dataset.videoSrc) return;
 
+        // Keep poster visible until browser can render video, then start playback.
+        const startPlayback = () => video.play().catch(() => {});
+
+        video.muted = true;
+        video.defaultMuted = true;
+        video.playsInline = true;
+        video.autoplay = true;
+        video.preload = 'auto';
+        video.addEventListener('canplay', startPlayback, { once: true });
         video.src = video.dataset.videoSrc;
         video.load();
-        video.play().catch(() => {});
+
+        if (video.readyState >= HTMLMediaElement.HAVE_FUTURE_DATA) startPlayback();
       };
 
       const videos = [...document.querySelectorAll('video[data-video-src]')];
