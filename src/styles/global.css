@@ -34,16 +34,16 @@ button { color: inherit; font: inherit; }
 .site-nav {
   position: sticky;
   z-index: 100;
-  top: .75rem;
+  top: 0;
   left: auto;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   gap: .75rem;
   color: #000;
-  width: auto;
-  margin: 1rem 1rem 0;
-  padding: 0;
+  width: 100%;
+  margin: 0;
+  padding: 1rem;
   background: #fff;
   opacity: 1;
   visibility: visible;
