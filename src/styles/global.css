@@ -34,7 +34,7 @@ button { color: inherit; font: inherit; }
 .site-nav {
   position: sticky;
   z-index: 100;
-  top: 0;
+  top: .75rem;
   left: auto;
   display: flex;
   flex-direction: row;
