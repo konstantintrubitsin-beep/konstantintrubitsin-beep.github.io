@@ -2,6 +2,10 @@
 import '../styles/global.css';
 import MediaDialog from '../components/MediaDialog.astro';
 const { title = 'Konstantin Trubitsin — Selected Works' } = Astro.props;
+const siteUrl = 'https://konstantintrubitsin-beep.github.io';
+const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
+const socialImageUrl = `${siteUrl}/media/social-preview.jpg`;
+const description = 'Константин Трубицин — дизайнер, AI-креатор.';
 ---
 
 <!doctype html>
@@ -9,7 +13,21 @@ const { title = 'Konstantin Trubitsin — Selected Works' } = Astro.props;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Konstantin Trubitsin — designer, AI creator, and AI filmmaker." />
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={socialImageUrl} />
+    <meta property="og:image:secure_url" content={socialImageUrl} />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="675" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImageUrl} />
     <link rel="icon" href="/favicon.svg?v=20261005" type="image/svg+xml" />
     <title>{title}</title>
   </head>
