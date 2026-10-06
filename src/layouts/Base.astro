@@ -47,6 +47,9 @@ const description = 'Константин Трубицин — дизайнер,
         video.autoplay = true;
         video.preload = 'auto';
         video.addEventListener('canplay', startPlayback, { once: true });
+        video.addEventListener('playing', () => {
+          video.closest('[data-media-card]')?.classList.add('is-video-ready');
+        }, { once: true });
         video.src = video.dataset.videoSrc;
         video.load();
 

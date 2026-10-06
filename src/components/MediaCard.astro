@@ -16,7 +16,10 @@ const poster = item.poster || (item.mediaType === 'video'
   style={`aspect-ratio: ${item.width || 800} / ${item.height || 600}`}
 >
   {item.mediaType === 'video' ? (
-    <video data-video-src={item.src} poster={poster} autoplay muted loop playsinline preload="none" aria-label={label} />
+    <>
+      <video data-video-src={item.src} poster={poster} autoplay muted loop playsinline preload="none" aria-label={label} />
+      <img class="media-poster" src={poster} alt="" aria-hidden="true" loading="eager" decoding="async" />
+    </>
   ) : (
     <img src={item.src} alt={label} loading="lazy" />
   )}

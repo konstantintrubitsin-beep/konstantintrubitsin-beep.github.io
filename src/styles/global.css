@@ -79,6 +79,7 @@ button { color: inherit; font: inherit; }
 }
 
 .media-card {
+  position: relative;
   display: block;
   width: 100%;
   padding: 0;
@@ -93,6 +94,22 @@ button { color: inherit; font: inherit; }
   height: 100%;
   object-fit: contain;
   object-position: top;
+}
+
+.media-card > video,
+.media-card > .media-poster {
+  position: absolute;
+  inset: 0;
+}
+
+.media-poster {
+  z-index: 1;
+  transition: opacity .2s ease;
+}
+
+.media-card.is-video-ready .media-poster {
+  opacity: 0;
+  pointer-events: none;
 }
 
 .media-card { background: #f3f3f3; }
