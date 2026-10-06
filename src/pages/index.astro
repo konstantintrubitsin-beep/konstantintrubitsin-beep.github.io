@@ -1,70 +1,14 @@
----
-import Base from '../layouts/Base.astro';
-import MediaCard from '../components/MediaCard.astro';
-import mediaData from '../data/noah-media.json';
-
-const navigation = [
-  ['photographs', 'Commerce'],
-  ['', 'Art'],
-  ['bio', 'About me'],
-];
-
-const featuredItems = mediaData.items.filter((item) => item.category === 'art');
----
-
-<Base title="Konstantin Trubitsin">
-  <nav class="site-nav" aria-label="Primary navigation">
-    {navigation.map(([path, label]) => (
-      <a class:list={{ active: path === '' }} aria-current={path === '' ? 'page' : undefined} href={`/${path}`}>{label}</a>
-    ))}
-  </nav>
-
-  <main class="home-main">
-    <div class="home-spacer" aria-hidden="true"></div>
-    <section class="home-grid media-gallery" id="home-grid" data-media-gallery aria-label="All works">
-      {featuredItems.map((item, index) => <MediaCard {item} {index} />)}
-    </section>
-    <div class="home-gutter" aria-hidden="true"></div>
-  </main>
-
-  <script>
-    const legacyCategory = new URLSearchParams(window.location.search).get('category');
-    const mediaPages = new Set(['photographs']);
-
-    if (mediaPages.has(legacyCategory)) {
-      window.location.replace(`/${legacyCategory}`);
-    }
-
-    const grid = document.querySelector('#home-grid');
-    const cards = [...grid.children];
-
-    for (let index = cards.length - 1; index > 0; index -= 1) {
-      const replacement = Math.floor(Math.random() * (index + 1));
-      [cards[index], cards[replacement]] = [cards[replacement], cards[index]];
-    }
-
-    cards.forEach((card) => grid.append(card));
-
-    const batchSize = 80;
-    let visibleCount = batchSize;
-    const sentinel = document.createElement('div');
-
-    cards.forEach((card, index) => {
-      card.hidden = index >= visibleCount;
-    });
-    grid.append(sentinel);
-
-    const observer = new IntersectionObserver(([entry]) => {
-      if (!entry.isIntersecting || visibleCount >= cards.length) return;
-
-      window.setTimeout(() => {
-        cards.slice(visibleCount, visibleCount + batchSize).forEach((card) => {
-          card.hidden = false;
-        });
-        visibleCount += batchSize;
-      }, 300);
-    }, { rootMargin: '200px', threshold: .1 });
-
-    observer.observe(sentinel);
-  </script>
-</Base>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="refresh" content="0; url=/photographs" />
+    <link rel="canonical" href="https://konstantintrubitsin-beep.github.io/photographs" />
+    <title>Commerce</title>
+  </head>
+  <body>
+    <script>window.location.replace('/photographs');</script>
+    <a href="/photographs">Commerce</a>
+  </body>
+</html>

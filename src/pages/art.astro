@@ -1,0 +1,41 @@
+---
+import Base from '../layouts/Base.astro';
+import MediaCard from '../components/MediaCard.astro';
+import mediaData from '../data/noah-media.json';
+
+const navigation = [
+  ['photographs', 'Commerce'],
+  ['art', 'Art'],
+  ['bio', 'About me'],
+];
+
+const featuredItems = mediaData.items.filter((item) => item.category === 'art');
+---
+
+<Base title="Konstantin Trubitsin">
+  <nav class="site-nav" aria-label="Primary navigation">
+    {navigation.map(([path, label]) => (
+      <a class:list={{ active: path === 'art' }} aria-current={path === 'art' ? 'page' : undefined} href={`/${path}`}>{label}</a>
+    ))}
+  </nav>
+
+  <main class="home-main">
+    <div class="home-spacer" aria-hidden="true"></div>
+    <section class="home-grid media-gallery" id="home-grid" data-media-gallery aria-label="All works">
+      {featuredItems.map((item, index) => <MediaCard {item} {index} />)}
+    </section>
+    <div class="home-gutter" aria-hidden="true"></div>
+  </main>
+
+  <script>
+    const grid = document.querySelector('#home-grid');
+    const cards = [...grid.children];
+
+    for (let index = cards.length - 1; index > 0; index -= 1) {
+      const replacement = Math.floor(Math.random() * (index + 1));
+      [cards[index], cards[replacement]] = [cards[replacement], cards[index]];
+    }
+
+    cards.forEach((card) => grid.append(card));
+  </script>
+</Base>
