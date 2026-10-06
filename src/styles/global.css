@@ -106,17 +106,26 @@ button { color: inherit; font: inherit; }
 }
 
 .media-dialog {
+  position: fixed;
+  inset: 0;
   width: 100vw;
-  height: 100svh;
+  height: 100dvh;
+  min-height: 100svh;
   max-width: none;
   max-height: none;
   margin: 0;
   padding: 1rem;
   border: 0;
-  background: rgb(255 255 255 / .94);
+  background: rgb(255 255 255 / .88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
 }
 
-.media-dialog::backdrop { background: rgb(255 255 255 / .25); }
+.media-dialog::backdrop {
+  background: rgb(255 255 255 / .25);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
 
 .media-dialog-shell {
   display: grid;
