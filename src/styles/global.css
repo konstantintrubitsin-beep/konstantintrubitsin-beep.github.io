@@ -210,6 +210,11 @@ button { color: inherit; font: inherit; }
   margin-top: 1rem;
   padding: 0;
 }
+.bio-photo {
+  width: min(14rem, 100%);
+  height: auto;
+  margin-bottom: 1rem;
+}
 
 
 @keyframes fade-in {
