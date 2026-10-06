@@ -21,6 +21,7 @@
       "mediaType": "video",
       "src": "/media/noah/commerce-002.mp4",
       "poster": "/media/posters/video/commerce-002.jpg?v=20261006-rubrik-final",
+      "coverOnly": true,
       "href": null,
       "sourceId": "e399584d95179782d5366015ee2b2d306c753022",
       "width": 2560,

@@ -35,8 +35,9 @@ const description = 'Константин Трубицин — дизайнер,
     <slot />
     <MediaDialog />
     <script>
-      const loadVideo = (video) => {
+      const loadVideo = (video, force = false) => {
         if (!(video instanceof HTMLVideoElement) || video.getAttribute('src') || !video.dataset.videoSrc) return;
+        if (!force && video.dataset.coverOnly === 'true') return;
 
         // Keep poster visible until browser can render video, then start playback.
         const startPlayback = () => video.play().catch(() => {});
@@ -145,7 +146,7 @@ const description = 'Константин Трубицин — дизайнер,
         const video = dialogContent.querySelector('video');
         if (video instanceof HTMLVideoElement) {
           video.controls = true;
-          loadVideo(video);
+          loadVideo(video, true);
         }
         dialog.showModal();
       };
