@@ -1,9 +1,9 @@
 ---
 const { item, index = 0, selected = false } = Astro.props;
 const label = item.label || `${item.category} media ${index + 1}`;
-const poster = item.mediaType === 'video'
+const poster = item.poster || (item.mediaType === 'video'
   ? `/media/posters/video/${item.src.split('/').at(-1)?.replace(/\.[^.]+$/, '.jpg')}`
-  : null;
+  : null);
 ---
 
 <button
