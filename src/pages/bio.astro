@@ -4,11 +4,11 @@ import Base from '../layouts/Base.astro';
 const navigation = [
   ['photographs', 'Commerce'],
   ['', 'Art'],
-  ['bio', 'Bio'],
+  ['bio', 'Обо мне'],
 ];
 ---
 
-<Base title="Konstantin Trubitsin — Биография">
+<Base title="Константин Трубицин — Обо мне">
   <nav class="site-nav" aria-label="Primary navigation">
     {navigation.map(([path, label]) => <a class:list={{ active: path === 'bio' }} href={`/${path}`}>{label}</a>)}
   </nav>
