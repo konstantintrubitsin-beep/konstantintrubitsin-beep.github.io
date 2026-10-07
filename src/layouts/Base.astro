@@ -155,12 +155,18 @@ const description = 'Константин Трубицин — дизайнер,
         card.addEventListener('click', () => openDialog(card));
       });
 
-      dialog?.addEventListener('click', (event) => {
-        const media = dialogContent?.querySelector('img, video');
-        const isMobile = window.matchMedia('(max-width: 640px)').matches;
+      const clickedVideo = (event) => {
+        const video = dialogContent?.querySelector('video');
+        return video instanceof HTMLVideoElement && event.composedPath().includes(video);
+      };
 
-        if (isMobile && media && event.composedPath().includes(media)) return;
+      dialog?.addEventListener('click', (event) => {
+        if (clickedVideo(event)) return;
         dialog.close();
+      });
+
+      dialog?.addEventListener('dblclick', (event) => {
+        if (clickedVideo(event)) dialog.close();
       });
       dialog?.addEventListener('close', clearDialog);
     </script>
