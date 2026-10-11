@@ -1,16 +1,15 @@
 {
-  "name": "portfolio-ai-creators-site",
+  "name": "konstantin-trubitsin-portfolio",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Personal portfolio of Konstantin Trubitsin",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Konstantin Trubitsin",
+  "license": "UNLICENSED",
   "type": "module",
   "dependencies": {
     "astro": "^7.1.3"
