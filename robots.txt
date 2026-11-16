@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://konstantintrubitsin-beep.github.io/sitemap.xml
